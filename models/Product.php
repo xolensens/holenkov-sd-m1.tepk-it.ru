@@ -89,4 +89,5 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasMany(ProductWorkshop::class, ['product_id' => 'id_product']);
     }
 
+
 }
