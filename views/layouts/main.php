@@ -17,7 +17,7 @@ $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
 $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no']);
 $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
-$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
+$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/Комфорт.png')]);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -25,6 +25,15 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <head>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <style>
+        body, h1, h2, h3, h4, h5, h6, input, textarea, button {
+            font-family: 'Candara', sans-serif!important;
+            background-color: #FFFFFF;
+
+        }
+        .navbar { color: }
+    </style>
+
 </head>
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
@@ -34,26 +43,25 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
-        'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
+        'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top'],
     ]);
     $menuItems = [];
 
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+
     } else {
-        $menuItems[] = ['label' => 'Home', 'url' => ['/site/index']];
-        $menuItems[] = ['label' => 'About', 'url' => ['/about/about']];
-        $menuItems[] = ['label' => 'Contact', 'url' => ['/site/contact']];
+        $menuItems[] = ['label' => 'Фабрика "Комфорт"', 'url' => ['/site/index']];
+        $menuItems[] = ['label' => 'Продукция', 'url' => ['/product/index']];
+        $menuItems[] = ['label' => 'Цехи', 'url' => ['/workshop/index']];
+        $menuItems[] = ['label' => 'Продукция мастерской', 'url' => ['/product-workshop/index']];
+        $menuItems[] = ['label' => 'Тип продукции', 'url' => ['/product-type/index']];
+        $menuItems[] = ['label' => 'Тип материалов', 'url' => ['/material-type/index']];
+        $menuItems[] = ['label' => 'Типы цехов', 'url' => ['/workshop-type/index']];
         $menuItems[] = '<li class="nav-item">'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'nav-link btn btn-link logout']
-            )
+
             . Html::endForm()
             . '</li>';
     }
-
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => $menuItems,
